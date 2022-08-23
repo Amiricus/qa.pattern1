@@ -37,14 +37,13 @@ class DeliveryTest {
         $("[name='phone']").setValue(validUser.getPhone());
         $("[data-test-id='agreement']").click();
         $(By.className("button")).click();
-        $(By.className("notification_visible")).shouldBe(visible, Duration.ofSeconds(30));
-        $(By.className("notification__title")).shouldHave(exactText("Успешно!"));
-        $(By.className("notification__content")).shouldHave(exactText("Встреча успешно забронирована на " + firstMeetingDate));
+        $(By.className("notification_visible")).shouldBe(visible, Duration.ofSeconds(5));
+        $("[data-test-id=success-notification] .notification__content").shouldHave(exactText("Встреча успешно запланирована на " + firstMeetingDate));
         $("[placeholder='Дата встречи']").doubleClick().sendKeys(Keys.DELETE);
         $("[placeholder='Дата встречи']").sendKeys(secondMeetingDate);
         $(By.className("button")).click();
-        $(By.className("notification_visible")).shouldBe(visible, Duration.ofSeconds(30));
-        $(By.className("notification__title")).shouldHave(exactText("Успешно!"));
-        $(By.className("notification__content")).shouldHave(exactText("Встреча успешно забронирована на " + secondMeetingDate));
+        $("[data-test-id=replan-notification] .notification__title").shouldHave(exactText("Необходимо подтверждение"));
+        $(By.className("button__text")).click();
+        $("[data-test-id='success-notification'] .notification__content").shouldHave(exactText("Встреча успешно запланирована на " + secondMeetingDate));
     }
 }
