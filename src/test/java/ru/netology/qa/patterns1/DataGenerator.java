@@ -29,7 +29,7 @@ public class DataGenerator {
     }
 
     public static String generatePhone(String locale) {
-        String phone = faker.numerify("+7##########");
+        String phone = faker.phoneNumber().phoneNumber();
         return phone;
     }
 
